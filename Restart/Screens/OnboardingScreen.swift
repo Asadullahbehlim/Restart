@@ -16,7 +16,9 @@ struct OnboardingScreen: View {
     var body: some View {
         VStack(spacing: 20) {
             
-        Text("OnBoarding")
+            ZStack {
+                Text("OnBoarding")
+            }
             
             Button(action: {
                 isOnboardingScreenActive = false
