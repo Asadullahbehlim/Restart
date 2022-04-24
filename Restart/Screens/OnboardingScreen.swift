@@ -17,15 +17,49 @@ struct OnboardingScreen: View {
         VStack(spacing: 20) {
             
             ZStack {
-                Text("OnBoarding")
+                Color("ColorBlue")
+                    .ignoresSafeArea(.all, edges: .all)
+                
+        VStack(spacing: 20) {
+            // MARK: - Header
+            VStack {
+                    Text("Share")
+                        .foregroundColor(.white)
+                        .font(.system(size: 65))
+                    .fontWeight(.heavy)
+                
+                Text("It's not how much we give but how much love we put into giving. ")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 25)
+                } //Header
+            // MARK: - Center
+            
+            ZStack {
+                ZStack {
+                    Circle()
+                        .stroke(.white.opacity(0.3), lineWidth: 40)
+                        .frame(width: 260, height: 260, alignment: .center)
+                    Circle()
+                        .stroke(.white.opacity(0.3), lineWidth: 80)
+                        .frame(width: 260, height: 260, alignment: .center)
+                    Image("character-1")
+                        .resizable()
+                        .scaledToFit()
+                }
+            } //Center
+            
+                         
+           // MARK: - footer
+            
+                
+                
+        }
+   
             }
             
-            Button(action: {
-                isOnboardingScreenActive = false
-            }) {
-                Text("Start")
-            }
-        } //: Vstack
+        }
 }
     
 }
