@@ -52,12 +52,62 @@ struct OnboardingScreen: View {
             
                          
            // MARK: - footer
-            
+            ZStack {
+                // Parts of custom Button
+                
+             //  1. Background
+                Capsule()
+                    .fill(Color.white.opacity(0.2))
+                
+                Capsule()
+                    .fill(Color.white.opacity(0.2))
+                    .padding(10)
+            //   2. Call-To-Action Button
+                
+                Text("Get Started")
+                    .font(.system(.title3, design: .rounded))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .offset(x: 20)
+                
+            //   3. Capsule (Dynamic width)
+                
+                HStack {
+                    Capsule()
+                        .fill(Color("ColorRed"))         .frame(width: 80)
+                    Spacer()
+                }
                 
                 
-        }
+            //   4. Draggable circle
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color("ColorRed"))
+                        Circle()
+                            .fill(.black.opacity(0.15))
+                            .padding(10)
+                        Image(systemName: "chevron.right.2")
+                            .foregroundColor(.white)
+                            .font(.system(size: 26, weight: .bold))
+                        
+                        
+                    }
+                    .frame(width: 80, height: 80, alignment: .center)
+                    .onTapGesture {
+                        isOnboardingScreenActive = false
+                    }
+                    Spacer()
+                } // Hstack
+                
+            } // Footer
+            .frame(height: 90, alignment: .center)
+            .padding()
+                
+        }  // Vstack
    
-            }
+            } //: ZSTACK
+            
             
         }
 }
