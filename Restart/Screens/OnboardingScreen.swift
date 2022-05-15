@@ -15,6 +15,8 @@ struct OnboardingScreen: View {
     
     @State private var ButtonOffSet : CGFloat = 0
     
+    @State private var isAnimation: Bool = false
+    
    // MARK: - Body
     
     var body: some View {
@@ -38,6 +40,10 @@ struct OnboardingScreen: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 25)
                 } //Header
+                .opacity(isAnimation ? 1:0)
+                .offset(y: isAnimation ? 0 : -40)
+                .animation(.easeOut(duration: 1), value: isAnimation)
+            
             // MARK: - Center
             
             ZStack {
@@ -45,13 +51,38 @@ struct OnboardingScreen: View {
                     Circle()
                         .stroke(.white.opacity(0.3), lineWidth: 40)
                         .frame(width: 260, height: 260, alignment: .center)
+                        .blur(radius: isAnimation ? 1 :10)
+                        .opacity(isAnimation ? 1 : 0)
+                        .scaleEffect(isAnimation ? 1 : 0.5)
+                         .animation(.easeOut(duration: 1), value: isAnimation)
+                        .onAppear(perform: {
+                        isAnimation = true
+                        })
                     Circle()
                         .stroke(.white.opacity(0.3), lineWidth: 80)
                         .frame(width: 260, height: 260, alignment: .center)
+                        .blur(radius: isAnimation ? 1 :10)
+                        .opacity(isAnimation ? 1 : 0)
+                        .scaleEffect(isAnimation ? 1 : 0.5)
+                         .animation(.easeOut(duration: 1), value: isAnimation)
+                        .onAppear(perform: {
+                        isAnimation = true
+                        })
+                    
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
+                        .opacity(isAnimation ? 1:0)
+                        .animation(.easeOut(duration: 1), value: isAnimation)
                 }
+//                .blur(radius: isAnimation ? 1 :10)
+//                .opacity(isAnimation ? 1 : 0)
+//                .scaleEffect(isAnimation ? 1 : 0.5)
+//                .animation(.easeOut(duration: 1), value: isAnimation)
+//                .onAppear(perform: {
+//                    isAnimation = true
+//                })
+                
             } //Center
             
                          
@@ -110,13 +141,16 @@ struct OnboardingScreen: View {
                             
                         }
                         ).onEnded({_ in
-                            if ButtonOffSet > ButtonWidth/2 {
-                                ButtonOffSet = ButtonWidth - 80
-                                isOnboardingScreenActive = false }
-                            else {
-                                ButtonOffSet = 0
+                            withAnimation(Animation.easeOut(duration: 0.7)) {
+                              
+                                if ButtonOffSet > ButtonWidth/2 {
+                                    ButtonOffSet = ButtonWidth - 80
+                                    isOnboardingScreenActive = false }
+                                else {
+                                    ButtonOffSet = 0
+                                }
                             }
-                                  ButtonOffSet = 0
+                                 
                         })
                     ) // Gesture
                     
@@ -126,10 +160,15 @@ struct OnboardingScreen: View {
             } // Footer
             .frame(height: 90, alignment: .center)
             .padding()
-                
+            .opacity(isAnimation ? 1:0)
+            .offset(y: isAnimation ? 0:40)
+            .animation(.easeOut(duration: 1), value: isAnimation)
         }  // Vstack
    
             } //: ZSTACK
+            .onAppear(perform: {
+                isAnimation = true
+            })
             
             
         }
