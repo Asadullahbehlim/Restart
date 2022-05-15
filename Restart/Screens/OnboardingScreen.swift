@@ -11,6 +11,10 @@ struct OnboardingScreen: View {
     // MARK: - Property
     @AppStorage ("OnboardingScreen") var isOnboardingScreenActive: Bool = true
     
+    @State private var ButtonWidth : Double = UIScreen.main.bounds.width - 80
+    
+    @State private var ButtonOffSet : CGFloat = 0
+    
    // MARK: - Body
     
     var body: some View {
@@ -74,7 +78,8 @@ struct OnboardingScreen: View {
                 
                 HStack {
                     Capsule()
-                        .fill(Color("ColorRed"))         .frame(width: 80)
+                        .fill(Color("ColorRed"))
+                        .frame(width: ButtonOffSet + 80)
                     Spacer()
                 }
                 
@@ -93,10 +98,28 @@ struct OnboardingScreen: View {
                         
                         
                     }
+                    .foregroundColor(.white)
                     .frame(width: 80, height: 80, alignment: .center)
-                    .onTapGesture {
-                        isOnboardingScreenActive = false
-                    }
+                    .offset(x: ButtonOffSet)
+                    .gesture(
+                    DragGesture()
+                    .onChanged({ gesture in
+                        if gesture.translation.width > 0 && ButtonOffSet <= ButtonWidth - 80 {
+                            ButtonOffSet = gesture.translation.width
+                        }
+                            
+                        }
+                        ).onEnded({_ in
+                            if ButtonOffSet > ButtonWidth/2 {
+                                ButtonOffSet = ButtonWidth - 80
+                                isOnboardingScreenActive = false }
+                            else {
+                                ButtonOffSet = 0
+                            }
+                                  ButtonOffSet = 0
+                        })
+                    ) // Gesture
+                    
                     Spacer()
                 } // Hstack
                 

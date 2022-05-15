@@ -18,7 +18,6 @@ struct Home: View {
             // MARK: - HEADER
             Spacer()
             
-        
             ZStack {
                 Circle()
                     .stroke(.gray.opacity(0.15), lineWidth: 40)
@@ -58,12 +57,10 @@ struct Home: View {
             .buttonBorderShape(.capsule)
             .controlSize(.large)
         }
-
     }
 }
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
-       //     .preferredColorScheme(.dark)
-    }
+  }
 }
